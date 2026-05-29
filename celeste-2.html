@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes, viewport-fit=cover" />
+  <title>𓂃⋆.˚ celeste about me</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  
+  <script>
+    const savedTheme = localStorage.getItem('celeste-theme') || 'purple';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+  </script>
+
+  <style>
+    /* ── Core Variables (Purple / Dark Mode Default) ── */
+    :root, :root[data-theme="purple"] {
+      --bg-base: #0f0a12;
+      --bg-gradient: linear-gradient(135deg, #160d1a 0%, #0f0a12 50%, #1a0f1d 100%);
+      --card-bg: rgba(22, 14, 25, 0.75);
+      
+      --pink-light: #f9b8d0;
+      --pink-mid: #e87da8;
+      --pink-dark: #d4508a;
+      --pink-accent: #ff66b2;
+      --purple-glow: #b854f5;
+      
+      --text-main: #fce4f4;
+      --text-muted: #b07090;
+      
+      --glow-shadow: 0 4px 24px rgba(255, 102, 178, 0.15), 0 0 15px rgba(184, 84, 245, 0.1);
+      --border-glow: 1px solid rgba(255, 102, 178, 0.3);
+      --white: #fff;
+      
+      /* Themed Components */
+      --made-by-bg: rgba(15, 10, 18, 0.8);
+      --nav-bg: rgba(30, 20, 35, 0.6);
+      --link-color: var(--pink-light);
+      --nav-active-bg: linear-gradient(90deg, var(--pink-dark), var(--purple-glow));
+      
+      --box-bg: rgba(30, 20, 35, 0.6);
+      --box-border: rgba(255, 102, 178, 0.2);
+      --badge-bg: rgba(20, 10, 15, 0.8);
+      --badge-text: var(--pink-light);
+      --modal-overlay: rgba(10, 5, 12, 0.85);
+      
+      --btn-bg: linear-gradient(90deg, var(--pink-dark), var(--purple-glow));
+      --icon-color: var(--purple-glow);
+      --friend-svg-bg: #1a0f1d;
+      --banner-overlay: linear-gradient(to bottom, transparent, var(--bg-base));
+      --link-hover-bg: linear-gradient(90deg, rgba(212, 80, 138, 0.8), rgba(184, 84, 245, 0.8));
+    }
+
+    /* ── Core Variables (Pink / Light Mode) ── */
+    :root[data-theme="pink"] {
+      --bg-base: #fff0f6;
+      --bg-gradient: linear-gradient(135deg, #fff0f6 0%, #fde8f0 50%, #fce4f4 100%);
+      --card-bg: rgba(255, 255, 255, 0.87);
+      
+      --pink-light: #fde8f0;
+      --pink-mid: #f9b8d0;
+      --pink-dark: #e87da8;
+      --pink-accent: #d4508a;
+      --purple-glow: #f9b8d0;
+      
+      --text-main: #5a3a4a;
+      --text-muted: #9a6070;
+      
+      --glow-shadow: 0 4px 24px rgba(232, 125, 168, 0.13);
+      --border-glow: 1px solid var(--pink-mid);
+      
+      /* Themed Components */
+      --made-by-bg: linear-gradient(90deg, #fde8f0, #fce4f4, #fde8f0);
+      --nav-bg: #fff;
+      --link-color: var(--pink-accent);
+      --nav-active-bg: var(--pink-dark);
+      
+      --box-bg: var(--pink-light);
+      --box-border: var(--pink-mid);
+      --badge-bg: #fff;
+      --badge-text: var(--pink-accent);
+      --modal-overlay: rgba(253, 232, 240, 0.85);
+      
+      --btn-bg: var(--pink-dark);
+      --icon-color: var(--pink-dark);
+      --friend-svg-bg: #fde8f0;
+      --banner-overlay: none;
+      --link-hover-bg: var(--pink-dark);
+    }
+    
+    /* Global Smooth Transitions */
+    body, .section-card, .bio-box, .nav-link, .project-card, .rule-card, 
+    .friend-card, .friend-pic, .social-link, .status-badge, .fave-chip, 
+    .details-list, .rules-list, .modal-content, .made-by-badge {
+      transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+    }
+    
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: 'Quicksand', 'Nunito', sans-serif;
+      background: var(--bg-gradient);
+      min-height: 100vh;
+      color: var(--text-main);
+      overflow-x: hidden;
+    }
+
+    /* ── Theme Toggle Button (Fixed Position) ── */
+    .theme-toggle-btn {
+      position: fixed; bottom: 20px; right: 20px;
+      width: 45px; height: 45px; border-radius: 50%;
+      background: var(--card-bg); border: var(--border-glow);
+      color: var(--pink-accent); font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; z-index: 1000;
+      box-shadow: var(--glow-shadow); backdrop-filter: blur(8px);
+      transition: transform 0.2s, box-shadow 0.2s, background 0.4s ease, border-color 0.4s ease;
+    }
+    .theme-toggle-btn:hover { transform: scale(1.1) rotate(15deg); box-shadow: 0 0 15px rgba(255, 102, 178, 0.4); }
+
+    /* ── Made by badge ── */
+    .made-by-badge {
+      text-align: center; padding: 8px 0;
+      font-size: 0.78rem; color: var(--pink-accent);
+      letter-spacing: 2px; font-weight: 600;
+      background: var(--made-by-bg);
+      border-bottom: var(--border-glow);
+      box-shadow: 0 0 10px rgba(255, 102, 178, 0.1);
+    }
+
+    /* ── Navbar ── */
+    .navbar { display: flex; justify-content: center; padding: 15px 0 5px; position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px); }
+    .nav-menu { display: flex; gap: 8px; list-style: none; flex-wrap: wrap; justify-content: center; padding: 0 10px; }
+    .nav-link {
+      display: block; padding: 7px 16px; border-radius: 20px;
+      font-size: 0.85rem; font-weight: 600; color: var(--link-color);
+      text-decoration: none; background: var(--nav-bg);
+      border: 1.5px solid var(--box-border); 
+      cursor: pointer; user-select: none;
+    }
+    .nav-link:hover { 
+      transform: translateY(-2px); 
+      box-shadow: 0 4px 15px rgba(255, 102, 178, 0.3); 
+      border-color: var(--pink-accent);
+    }
+    .nav-link.active {
+      background: var(--nav-active-bg); 
+      color: #fff; border-color: transparent;
+      box-shadow: 0 2px 15px rgba(255, 102, 178, 0.4);
+    }
+    .nav-link:active { transform: scale(0.93); }
+
+    /* ── Container ── */
+    .container { max-width: 540px; margin: 18px auto 80px; padding: 0 14px; display: flex; flex-direction: column; gap: 20px; }
+
+    /* ── Section card ── */
+    .section-card {
+      background: var(--card-bg);
+      border-radius: 22px; box-shadow: var(--glow-shadow);
+      border: var(--border-glow); padding: 22px 20px 18px;
+      backdrop-filter: blur(12px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .section-card::before {
+      content: '';
+      position: absolute; top: -50px; right: -50px;
+      width: 100px; height: 100px;
+      background: var(--purple-glow);
+      filter: blur(60px); opacity: 0.2;
+      border-radius: 50%; z-index: 0;
+      transition: background 0.4s ease;
+    }
+    
+    .section-card > * { position: relative; z-index: 1; }
+
+    /* ── Tab fade animation ── */
+    .content-section { display: none; }
+    .content-section.active {
+      display: block;
+      animation: tabFadeIn 0.4s cubic-bezier(.4,0,.2,1) both;
+    }
+    @keyframes tabFadeIn {
+      from { opacity: 0; transform: translateY(15px) scale(0.98); }
+      to   { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ── Profile card ── */
+    .profile-section { text-align: center; position: relative; overflow: hidden; margin: -22px -20px 18px; padding-bottom: 8px; border-bottom: var(--border-glow); }
+    .profile-banner { width: 100%; height: 120px; border-radius: 22px 22px 0 0; overflow: hidden; margin-bottom: -40px; position: relative; }
+    .profile-banner::after { content: ''; position: absolute; inset: 0; background: var(--banner-overlay); transition: background 0.4s ease; }
+    .banner-img { width: 100%; height: 100%; object-fit: cover; }
+    .profile-pic-wrapper { display: flex; justify-content: center; margin-bottom: 12px; position: relative; z-index: 2; }
+    .profile-pic {
+      width: 95px; height: 95px; border-radius: 50%;
+      border: 3.5px solid var(--pink-accent); overflow: hidden; position: relative;
+      background: var(--bg-base); box-shadow: 0 0 20px rgba(255, 102, 178, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.4s ease;
+    }
+    .profile-pic:hover { transform: scale(1.05) rotate(-3deg); box-shadow: 0 0 25px rgba(255, 102, 178, 0.6); }
+    .profile-img { width: 100%; height: 100%; object-fit: cover; }
+    
+    /* Discord Realtime Status Indicator */
+    .profile-status {
+      position: absolute; bottom: 4px; right: 4px;
+      width: 22px; height: 22px; border-radius: 50%;
+      border: 3px solid var(--bg-base);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; color: #fff; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+      transition: background 0.3s ease, border-color 0.4s ease;
+      background: #747f8d; /* Default offline color */
+    }
+    .status-online { background: #43b581; }
+    .status-idle { background: #faa61a; }
+    .status-dnd { background: #f04747; }
+    .status-offline { background: #747f8d; }
+
+    .name-title { font-size: 1.6rem; font-weight: 700; color: var(--pink-accent); margin-bottom: 2px; text-shadow: 0 0 10px rgba(255, 102, 178, 0.2); }
+    .pronouns { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+    .bio-box {
+      background: var(--box-bg); border-radius: 14px;
+      padding: 12px 16px; margin: 8px 20px 12px;
+      font-size: 0.9rem; color: var(--text-main);
+      border-left: 3px solid var(--pink-accent);
+    }
+    .mini-status { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 4px; padding-bottom: 14px;}
+    .status-badge {
+      background: var(--badge-bg); border: 1px solid var(--pink-dark);
+      border-radius: 20px; padding: 5px 14px; font-size: 0.8rem;
+      color: var(--badge-text); display: flex; align-items: center; gap: 6px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    /* ── Section headers ── */
+    .section-header-wrapper { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .section-title { font-size: 1.15rem; font-weight: 700; color: var(--pink-accent); letter-spacing: 1px; text-shadow: 0 0 8px rgba(255,102,178,0.2); }
+    .title-deco { color: var(--icon-color); transition: color 0.4s ease; }
+    .section-sticker img { width: 55px; height: 55px; border-radius: 14px; object-fit: cover; border: 1px solid rgba(255,255,255,0.1); }
+
+    /* ── About ── */
+    .about-text p { font-size: 0.92rem; line-height: 1.7; margin-bottom: 12px; color: var(--text-main); }
+    .highlight-text { color: var(--pink-accent); font-weight: 600; }
+
+    /* ── Games ── */
+    .games-showcase { display: flex; flex-direction: column; gap: 14px; }
+    .game-card {
+      display: flex; align-items: center; gap: 14px;
+      background: var(--box-bg); border-radius: 16px; padding: 12px 14px;
+      border: 1px solid var(--box-border);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s, background 0.4s ease;
+    }
+    .game-card:hover { 
+      transform: translateX(6px); 
+      box-shadow: 0 4px 15px rgba(255, 102, 178, 0.2); 
+      border-color: var(--pink-accent);
+    }
+    .game-img-wrapper { position: relative; flex-shrink: 0; }
+    .game-img { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; border: 2px solid var(--icon-color); transition: border-color 0.4s ease; background: #fff; }
+    .game-status {
+      position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
+      font-size: 0.65rem; font-weight: 700; padding: 3px 8px;
+      border-radius: 12px; white-space: nowrap; color: #fff;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    }
+    .game-status.playing { background: linear-gradient(90deg, #e87da8, #d4508a); }
+    .game-status.daily   { background: linear-gradient(90deg, #b854f5, #9b72c8); }
+    .game-status.casual  { background: linear-gradient(90deg, #72b8c8, #4a90e2); }
+    .game-name { font-size: 0.95rem; font-weight: 700; color: var(--pink-accent); }
+    .game-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 3px; }
+    
+    .details-list { margin-top: 14px; display: flex; flex-direction: column; gap: 8px; background: var(--box-bg); padding: 12px; border-radius: 12px; }
+    .detail-row { display: flex; gap: 10px; font-size: 0.85rem; align-items: flex-start; }
+    .detail-label { color: var(--pink-accent); font-weight: 600; min-width: 125px; }
+    .detail-value { color: var(--text-main); }
+    
+    .fun-fact {
+      margin-top: 14px; background: var(--box-bg); border-radius: 14px;
+      padding: 12px 16px; font-size: 0.85rem; color: var(--text-main);
+      border-left: 3px solid var(--pink-accent); font-style: italic;
+    }
+
+    /* ── Projects ── */
+    .project-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .project-card {
+      background: var(--box-bg); border-radius: 14px; padding: 14px;
+      border: 1px solid var(--box-border);
+      text-align: center; transition: all 0.2s ease, background 0.4s ease, border-color 0.4s ease;
+    }
+    .project-card:hover { transform: translateY(-5px); border-color: var(--pink-accent); box-shadow: 0 5px 15px rgba(255, 102, 178, 0.2); }
+    .project-icon { font-size: 1.8rem; color: var(--pink-accent); margin-bottom: 8px; }
+    .project-title { font-size: 0.9rem; font-weight: 700; color: var(--pink-accent); margin-bottom: 4px; }
+    .project-desc { font-size: 0.75rem; color: var(--text-muted); }
+
+    /* ── Faves ── */
+    .faves-container { display: flex; flex-wrap: wrap; gap: 10px; }
+    .fave-chip {
+      background: var(--badge-bg);
+      border: 1px solid var(--pink-dark); border-radius: 20px; padding: 7px 16px;
+      font-size: 0.85rem; color: var(--badge-text); font-weight: 600;
+      transition: all 0.2s, background 0.4s ease, color 0.4s ease; cursor: default;
+      box-shadow: inset 0 0 8px rgba(255, 102, 178, 0.05);
+    }
+    .fave-chip:hover { 
+      transform: scale(1.05); 
+      border-color: var(--pink-accent);
+      box-shadow: 0 0 12px rgba(255, 102, 178, 0.2); 
+    }
+
+    /* ── Rules ── */
+    .rules-container { display: flex; flex-direction: column; gap: 12px; }
+    .rule-card {
+      display: flex; gap: 14px; align-items: flex-start;
+      background: var(--box-bg); border-radius: 14px;
+      padding: 14px; border: 1px solid var(--box-border);
+      transition: transform 0.2s, background 0.4s ease, border-color 0.4s ease;
+    }
+    .rule-card:hover { transform: translateX(5px); border-color: var(--pink-accent); }
+    .rule-icon { color: var(--icon-color); font-size: 1.1rem; margin-top: 2px; flex-shrink: 0; transition: color 0.4s ease; }
+    .rule-content h3 { font-size: 0.95rem; font-weight: 700; color: var(--pink-accent); margin-bottom: 4px; }
+    .rule-content p { font-size: 0.85rem; color: var(--text-main); line-height: 1.6; }
+
+    /* ── Friends ── */
+    .friends-container { display: flex; flex-direction: column; gap: 12px; }
+    .friend-card {
+      display: flex; gap: 14px; align-items: center;
+      background: var(--box-bg); border-radius: 16px;
+      padding: 12px 14px; border: 1px solid var(--box-border);
+      transition: all 0.2s, background 0.4s ease, border-color 0.4s ease;
+    }
+    .friend-card:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(255, 102, 178, 0.15); border-color: var(--pink-accent); }
+    
+    .friend-pic { 
+      width: 54px; height: 54px; border-radius: 50%; 
+      border: 2px solid var(--icon-color); flex-shrink: 0; 
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--pink-accent); font-weight: bold;
+      background: var(--friend-svg-bg);
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    .friend-info h3 { font-size: 0.95rem; font-weight: 700; color: var(--pink-accent); }
+    .friend-info p { font-size: 0.82rem; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── Credits ── */
+    .credits-container { display: flex; flex-direction: column; gap: 12px; text-align: center; padding: 20px 10px; }
+    .credit-role { font-size: 1.1rem; font-weight: 700; color: var(--pink-accent); margin-bottom: 5px; }
+    .credit-name { font-size: 0.9rem; color: var(--text-main); margin-bottom: 15px; }
+    .credit-heart { color: var(--icon-color); font-size: 1.5rem; margin: 10px 0; animation: pulseMusic 2s infinite; }
+
+    /* ── Connect ── */
+    .social-links { display: flex; flex-direction: column; gap: 10px; }
+    .social-link {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--box-bg); border-radius: 14px; padding: 12px 18px;
+      font-size: 0.9rem; font-weight: 600; color: var(--pink-accent);
+      text-decoration: none; border: 1px solid var(--box-border);
+      transition: all 0.2s, background 0.4s ease, border-color 0.4s ease;
+    }
+    .social-link:hover { 
+      background: var(--link-hover-bg); 
+      color: #fff; border-color: transparent; 
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(255, 102, 178, 0.3);
+    }
+    .social-link i { font-size: 1.2rem; }
+
+    /* ── Modal ── */
+    .rules-modal {
+      position: fixed; inset: 0; z-index: 1000;
+      background: var(--modal-overlay);
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(8px);
+      animation: modalIn 0.35s ease both;
+      transition: background 0.4s ease;
+    }
+    @keyframes modalIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-content {
+      background: var(--bg-base); border-radius: 24px;
+      border: 2px solid var(--icon-color);
+      box-shadow: 0 0 30px rgba(255, 102, 178, 0.1);
+      padding: 32px 28px 26px; max-width: 350px; text-align: center;
+      animation: modalSlide 0.4s cubic-bezier(.4,0,.2,1) both;
+      transition: background 0.4s ease, border-color 0.4s ease;
+    }
+    @keyframes modalSlide {
+      from { transform: translateY(40px) scale(0.95); opacity: 0; }
+      to   { transform: translateY(0) scale(1); opacity: 1; }
+    }
+    .modal-header { display: flex; justify-content: center; align-items: center; gap: 12px; margin-bottom: 14px; color: var(--pink-accent); }
+    .modal-header h2 { font-size: 1.15rem; font-weight: 700; color: var(--pink-accent); text-shadow: 0 0 8px rgba(255,102,178,0.2); }
+    .modal-greeting { font-size: 0.95rem; color: var(--text-main); margin-bottom: 16px; }
+    .rules-list { text-align: left; margin-bottom: 18px; background: var(--box-bg); padding: 12px; border-radius: 12px; transition: background 0.4s ease; }
+    .rule-item { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: var(--text-main); margin-bottom: 8px; }
+    .rule-item i { color: var(--pink-accent); margin-top: 3px; }
+    .modal-footer-text { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 16px; font-style: italic; }
+    .modal-ok-btn {
+      background: var(--btn-bg); 
+      color: #fff; border: none; border-radius: 20px;
+      padding: 10px 32px; font-size: 0.95rem; font-weight: 700; cursor: pointer;
+      display: inline-flex; align-items: center; gap: 8px;
+      font-family: 'Quicksand', sans-serif; transition: all 0.2s, background 0.4s ease;
+      box-shadow: 0 4px 15px rgba(255, 102, 178, 0.3);
+    }
+    .modal-ok-btn:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(255, 102, 178, 0.4); }
+    .modal-ok-btn:active { transform: scale(0.96); }
+
+    /* ── General Animations ── */
+    .ripple {
+      position: fixed; border-radius: 50%;
+      width: 20px; height: 20px; background: rgba(255, 102, 178, 0.5);
+      pointer-events: none; transform: translate(-50%,-50%) scale(0);
+      animation: rippleAnim 0.6s ease-out forwards; z-index: 9999;
+      box-shadow: 0 0 10px rgba(255, 102, 178, 0.5);
+    }
+    @keyframes rippleAnim { to { transform: translate(-50%,-50%) scale(7); opacity: 0; } }
+    .click-heart {
+      position: fixed; pointer-events: none; font-size: 1.1rem;
+      animation: heartFloat 1s ease-out forwards; z-index: 9999; user-select: none;
+      filter: drop-shadow(0 0 5px rgba(255,102,178,0.8));
+    }
+    @keyframes heartFloat {
+      0%   { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+      100% { opacity: 0; transform: translate(-50%, -150%) scale(0.6) rotate(20deg); }
+    }
+    @keyframes pulseMusic { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 8px var(--pink-accent); } }
+
+    /* ── Animated Vector Cat ── */
+    #roaming-cat-container {
+      position: fixed; width: 60px; height: 60px; pointer-events: auto; cursor: pointer;
+      z-index: 500; transition: left 2s linear, top 2s linear;
+      filter: drop-shadow(0 0 8px rgba(255, 102, 178, 0.4)); will-change: transform, left, top;
+    }
+    .cat-svg { width: 100%; height: 100%; overflow: visible; }
+    @keyframes walk-front { 0% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(-15deg); } 100% { transform: rotate(0deg); } }
+    @keyframes walk-back { 0% { transform: rotate(0deg); } 25% { transform: rotate(-15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(15deg); } 100% { transform: rotate(0deg); } }
+    .cat-moving .leg-1 { transform-origin: top; animation: walk-front 0.6s infinite linear; }
+    .cat-moving .leg-2 { transform-origin: top; animation: walk-back 0.6s infinite linear; }
+    .cat-moving .leg-3 { transform-origin: top; animation: walk-back 0.6s infinite linear; }
+    .cat-moving .leg-4 { transform-origin: top; animation: walk-front 0.6s infinite linear; }
+    @keyframes tail-swish { 0% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } 100% { transform: rotate(0deg); } }
+    .cat-tail { transform-origin: left bottom; animation: tail-swish 2s infinite ease-in-out; }
+    .cat-waving .leg-1 { display: none; } 
+    .cat-waving .wave-arm { display: block; transform-origin: bottom right; animation: wave-paw 0.4s infinite alternate ease-in-out; }
+    @keyframes wave-paw { 0% { transform: rotate(0deg); } 100% { transform: rotate(40deg); } }
+    #roaming-cat-container.hidden { opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
+    #roaming-cat-container.visible { opacity: 1; transition: opacity 0.5s ease, left 2s linear, top 2s linear; }
+    .flip-left { transform: scaleX(-1); }
+  </style>
+</head>
+<body>
+
+  <button id="theme-toggle" class="theme-toggle-btn" title="Change Theme">
+    <i class="fas fa-magic"></i>
+  </button>
+
+  <div id="roaming-cat-container" class="hidden cat-moving" title="Click me!">
+    <svg class="cat-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <g>
+        <path class="cat-tail" d="M 85 55 Q 105 40 95 20" stroke="var(--pink-accent)" stroke-width="6" fill="none" stroke-linecap="round" />
+        <line class="leg-3" x1="65" y1="70" x2="65" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
+        <line class="leg-4" x1="80" y1="70" x2="80" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
+        <rect x="30" y="45" width="60" height="30" rx="15" fill="var(--pink-accent)" />
+        <line class="leg-1" x1="35" y1="70" x2="35" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
+        <line class="leg-2" x1="48" y1="70" x2="48" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
+        <g class="wave-arm" style="display:none;" transform="translate(35, 75)">
+           <line x1="0" y1="0" x2="-15" y2="-20" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
+           <circle cx="-16" cy="-22" r="2" fill="var(--bg-base)" />
+        </g>
+        <circle cx="30" cy="40" r="18" fill="var(--pink-accent)" />
+        <polygon points="18,28 15,10 30,24" fill="var(--pink-accent)" />
+        <polygon points="42,28 45,10 30,24" fill="var(--pink-accent)" />
+        <polygon points="20,26 17,14 28,24" fill="var(--bg-base)" opacity="0.4" />
+        <polygon points="40,26 43,14 32,24" fill="var(--bg-base)" opacity="0.4" />
+        <circle cx="23" cy="38" r="2.5" fill="var(--bg-base)" /> 
+        <circle cx="37" cy="38" r="2.5" fill="var(--bg-base)" /> 
+        <path d="M 27 43 Q 30 46 33 43" stroke="var(--bg-base)" fill="none" stroke-width="2" stroke-linecap="round" />
+        <ellipse cx="18" cy="42" rx="3" ry="1.5" fill="var(--icon-color)" opacity="0.6"/>
+        <ellipse cx="42" cy="42" rx="3" ry="1.5" fill="var(--icon-color)" opacity="0.6"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="rules-modal" id="rulesModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <i class="fas fa-moon"></i>
+        <h2>Before you view...</h2>
+        <i class="fas fa-moon"></i>
+      </div>
+      <div class="modal-body">
+        <p class="modal-greeting">｡𖦹°‧⭑.ᐟ Welcome to my profile۫ ꣑ৎ</p>
+        <div class="rules-list">
+          <div class="rule-item">
+            <i class="fas fa-star"></i>
+            <span>Please consider reading my rules first before planning on interacting with me.</span>
+          </div>
+        </div>
+        <p class="modal-footer-text">Click okay or get hit by a bomb ♡</p>
+      </div>
+      <button class="modal-ok-btn" id="modalOkBtn">
+        <i class="fas fa-check"></i> okay <i class="fas fa-check"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="made-by-badge"><span>✧ made by celeste ✧</span></div>
+
+  <nav class="navbar">
+    <ul class="nav-menu">
+      <li class="nav-item"><a href="#" class="nav-link active" data-section="about">about</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="gaming">games</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="projects">projects</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="faves">faves</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="rules">rules</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="friends">friends</a></li>
+      <li class="nav-item"><a href="#" class="nav-link" data-section="credits">credits</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+
+    <section id="about" class="section-card content-section active" data-section="about">
+      <div class="profile-section">
+        <div class="profile-banner">
+          <img src="https://i.pinimg.com/736x/0e/d3/d2/0ed3d2ff953393979a9cfc291b883da5.jpg" alt="banner" class="banner-img" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=600&h=150&fit=crop'" />
+        </div>
+        <div class="profile-pic-wrapper">
+          <div class="profile-pic">
+            <img src="https://u.cubeupload.com/xyu/1780085203682.png" alt="celeste" class="profile-img" onerror="this.src='https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'" />
+            
+            <div id="discord-status" class="profile-status status-offline" title="Checking status...">
+               <i class="fas fa-circle-notch fa-spin"></i>
+            </div>
+            
+          </div>
+        </div>
+        <h1 class="name-title">celeste <span>🌸</span></h1>
+        <p class="pronouns">she / her • 19</p> 
+        <div class="bio-box">
+          <p><i class="fas fa-feather-alt"></i> artist &amp; coder. I believe in kindness, late-night doodles, and making everyday peaceful and glowing</p>
+        </div>
+        <div class="mini-status">
+          <span class="status-badge"><i class="fas fa-map-pin"></i> Oman</span>
+        </div>
+      </div>
+
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> about me <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://u.cubeupload.com/xyu/tn0nan5075rmw0cyeqkv.png" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="about-text">
+        <p>Hey <i class="fas fa-star" style="color:var(--icon-color);"></i> I'm celeste! i've always been drawn to soft aesthetics like strawberry milk, and vintage lace but switching to <span class="highlight-text">dark mode</span> is a good change sometimes.</p>
+        <p>By day I'm an absolute chud and a student. By night I'm journaling, sketching out designs, or deep in the terminal coding.</p>
+        <p>I also love doing workouts and going to the gym to stay active and healthy! 🏋️‍♀️</p>
+        <p><i class="fas fa-quote-left" style="color:var(--pink-accent); font-size: 0.8em;"></i> #Lifeisbetterwithfriends <i class="fas fa-quote-right" style="color:var(--pink-accent); font-size: 0.8em;"></i></p>
+      </div>
+    </section>
+
+    <section id="gaming" class="section-card content-section" data-section="gaming">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> my games <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://u.cubeupload.com/xyu/wj66ep7cxhrmy0cyeqv9.png" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="games-showcase">
+
+        <div class="game-card">
+          <div class="game-img-wrapper">
+            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg" alt="Rocket League" class="game-img" />
+            <span class="game-status casual">casual</span>
+          </div>
+          <div class="game-info">
+            <h3 class="game-name">Rocket League</h3>
+            <p class="game-desc">C3</p>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img-wrapper">
+            <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/icon/df19bf747ab444851bd80b957cf3ba22.png" alt="Minecraft" class="game-img" style="background:transparent; object-fit:contain;" />
+            <span class="game-status casual">casual</span>
+          </div>
+          <div class="game-info">
+            <h3 class="game-name">Minecraft</h3>
+            <p class="game-desc">cottage builder • modded survival</p>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img-wrapper">
+            <img src="https://store-images.s-microsoft.com/image/apps.43004.13788092892305597.551db84c-3ba0-4223-9588-4e803d51ebdc.7b8cfdff-5dfd-4bd9-9069-93e15091ff74" alt="Forza Horizon 6" class="game-img" />
+            <span class="game-status casual">casual</span>
+          </div>
+          <div class="game-info">
+            <h3 class="game-name">Forza Horizon 6</h3>
+            <p class="game-desc">cruising Japan • car collector</p>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img-wrapper">
+            <img src="https://cdn2.steamgriddb.com/icon/4e7f9e8ce294da1bc391a62cc4a3ea30.png" alt="Zenless Zone Zero" class="game-img" style="background:transparent; object-fit:contain;" />
+            <span class="game-status casual">casual</span>
+          </div>
+          <div class="game-info">
+            <h3 class="game-name">Zenless Zone Zero</h3>
+            <p class="game-desc">Starter • Loving it so far</p>
+          </div>
+        </div>
+
+        <div class="game-card">
+          <div class="game-img-wrapper">
+            <img src="https://cdn2.steamgriddb.com/icon/3ab39794d2ba6a1cd0bcbf0c29ed212d.png" alt="Roblox" class="game-img" style="background:transparent; object-fit:contain;" />
+            <span class="game-status casual">casual</span>
+          </div>
+          <div class="game-info">
+            <h3 class="game-name">ROBLOX</h3>
+            <p class="game-desc">I love playing horror games with friends</p>
+          </div>
+        </div>
+
+        <div class="details-list">
+          <div class="detail-row">
+            <span class="detail-label"><i class="fas fa-history"></i> Last Played:</span>
+            <span class="detail-value">Minecraft, Rocket League</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label"><i class="fas fa-clock"></i> favorite genre</span>
+            <span class="detail-value">Story &amp; Multiplayer</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label"><i class="fas fa-crown"></i> all time fave</span>
+            <span class="detail-value">Final Fantasy X</span>
+          </div>
+        </div>
+        <div class="fun-fact">
+          <i class="fas fa-sparkles" style="color:var(--icon-color);"></i>
+          I'm always down for co-op or play! dm me your UID or user in any social ♡
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section-card content-section" data-section="projects">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> my projects <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://i.pinimg.com/originals/95/b5/a4/95b5a49f5127570e435d8d488d52baa4.gif" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="project-grid">
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-code"></i></div>
+          <h3 class="project-title">Discord Bots</h3>
+          <p class="project-desc">Creating custom embed utilities and moderation systems.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-paint-brush"></i></div>
+          <h3 class="project-title">Art Portfolio</h3>
+          <p class="project-desc">Character designs and aesthetic interface mocks.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-server"></i></div>
+          <h3 class="project-title">Self-Hosting</h3>
+          <p class="project-desc">Running environments on local Linux and Pi hardware.</p>
+        </div>
+        <div class="project-card">
+          <div class="project-icon"><i class="fas fa-mobile-alt"></i></div>
+          <h3 class="project-title">App Dev</h3>
+          <p class="project-desc">Hybrid web & mobile wrappers for personal projects.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="faves" class="section-card content-section" data-section="faves">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> Current faves <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://i.pinimg.com/originals/74/8b/fd/748bfd88c844dead6c90d1c42a7c1bfd.gif" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="faves-container">
+        <div class="fave-chip">🍰 Strawberry shortcake</div>
+        <div class="fave-chip">🧸 Cute plushies</div>
+        <div class="fave-chip">🎧 Late night coding</div>
+        <div class="fave-chip">💜 Dark interfaces</div>
+        <div class="fave-chip">🏋️‍♀️ Working out</div>
+      </div>
+    </section>
+
+    <section id="rules" class="section-card content-section" data-section="rules">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> my rules <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://i.pinimg.com/originals/95/b5/a4/95b5a49f5127570e435d8d488d52baa4.gif" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="rules-container">
+        <div class="rule-card">
+          <div class="rule-icon"><i class="fas fa-heart"></i></div>
+          <div class="rule-content">
+            <h3>Be Kind &amp; Respectful</h3>
+            <p>Please be nice to everyone! No hate speech, bullying, or drama. This is a safe space.</p>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon"><i class="fas fa-ban"></i></div>
+          <div class="rule-content">
+            <h3>DNI If...</h3>
+            <p>Under 13, homophobic, transphobic, or generally hateful. Basic DNI criteria apply.</p>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon"><i class="fas fa-star"></i></div>
+          <div class="rule-content">
+            <h3>Don't take me too seriously</h3>
+            <p>Don't ever as in EVER take what I said by heart or seriously. If I did offend you in anyway and made you uncomfy feel free to tell me. ♡</p>
+          </div>
+        </div>
+        <div class="rule-card">
+          <div class="rule-icon"><i class="fas fa-comment"></i></div>
+          <div class="rule-content">
+            <h3>Interaction</h3>
+            <p>Feel free to DM me but please be patient! I may not respond even if I'm on due to me doing something else or just busy.</p>
+          </div>
+        </div>
+      </div>
+      <div class="fun-fact">
+        <i class="fas fa-sparkles" style="color:var(--icon-color);"></i>
+        Thanks for reading my rules! let's be mutuals ♡
+      </div>
+    </section>
+
+    <section id="friends" class="section-card content-section" data-section="friends">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> my besties <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://i.pinimg.com/originals/0a/ce/2a/0ace2a84df7bce8d228bb115b57b7a5f.gif" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="friends-container">
+        <div class="friend-card">
+          <div class="friend-pic">C</div>
+          <div class="friend-info"><h3>cutient</h3><p>my bestie ♡</p></div>
+        </div>
+        <div class="friend-card">
+          <div class="friend-pic">L</div>
+          <div class="friend-info"><h3>lolo</h3><p>my bestie ♡</p></div>
+        </div>
+        <div class="friend-card">
+          <div class="friend-pic">H</div>
+          <div class="friend-info"><h3>h3ou80</h3><p>my bestie ♡</p></div>
+        </div>
+        <div class="friend-card">
+          <div class="friend-pic">M</div>
+          <div class="friend-info"><h3>mayar</h3><p>my bestie ♡</p></div>
+        </div>
+      </div>
+      <div class="fun-fact"><i class="fas fa-sparkles" style="color:var(--icon-color);"></i> I love my besties, let's be friends too ♡</div>
+    </section>
+
+    <section id="credits" class="section-card content-section" data-section="credits">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> credits <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://i.pinimg.com/originals/74/8b/fd/748bfd88c844dead6c90d1c42a7c1bfd.gif" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="credits-container">
+        <i class="fas fa-heart credit-heart"></i>
+        <div class="credit-role">Made By</div>
+        <div class="credit-name">celeste</div>
+        
+        <div class="credit-role" style="margin-top: 10px;">Special Thanks</div>
+        <div class="credit-name">Thanks to cutient for the help ♡</div>
+      </div>
+    </section>
+
+    <section class="section-card">
+      <div class="section-header-wrapper">
+        <h2 class="section-title"><span class="title-deco">․</span> let's be friends <span class="title-deco">․</span></h2>
+        <div class="section-sticker">
+          <img src="https://u.cubeupload.com/xyu/8h1fb6hevsrmt0cyeqkr.png" alt="sticker" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=60&h=60&fit=crop'" />
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="https://discord.com/users/1424804192672940113" class="social-link" target="_blank">
+          <i class="fab fa-discord"></i> Discord
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // ── Theme Toggle Logic ──
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const rootElement = document.documentElement;
+
+    themeToggleBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const currentTheme = rootElement.getAttribute('data-theme');
+      const newTheme = currentTheme === 'purple' ? 'pink' : 'purple';
+      
+      rootElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('celeste-theme', newTheme);
+      
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      heart.textContent = '✨';
+      const rect = themeToggleBtn.getBoundingClientRect();
+      heart.style.left = (rect.left + rect.width / 2) + 'px';
+      heart.style.top  = (rect.top + rect.height / 2) + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    // ── Discord Realtime Status (via Lanyard API) ──
+    async function fetchDiscordStatus() {
+      try {
+        // Fetches your real-time status using your exact Discord ID
+        const res = await fetch('https://api.lanyard.rest/v1/users/1424804192672940113');
+        const data = await res.json();
+        const statusEl = document.getElementById('discord-status');
+        
+        if(data.success) {
+          const status = data.data.discord_status; // returns "online", "idle", "dnd", or "offline"
+          
+          // Apply color class
+          statusEl.className = 'profile-status status-' + status;
+          
+          // Apply correct icon based on status
+          if(status === 'online') {
+             statusEl.innerHTML = '<i class="fas fa-check-circle"></i>';
+             statusEl.title = 'Online';
+          } else if(status === 'idle') {
+             statusEl.innerHTML = '<i class="fas fa-moon"></i>';
+             statusEl.title = 'Idle';
+          } else if(status === 'dnd') {
+             statusEl.innerHTML = '<i class="fas fa-minus-circle"></i>';
+             statusEl.title = 'Do Not Disturb';
+          } else {
+             statusEl.innerHTML = '<i class="fas fa-circle" style="color: #4f545c;"></i>';
+             statusEl.title = 'Offline';
+          }
+        } else {
+           // If user is not in Lanyard server, set a fallback
+           statusEl.className = 'profile-status status-idle';
+           statusEl.innerHTML = '<i class="fas fa-moon"></i>';
+           statusEl.title = 'Join Lanyard Discord to show status!';
+        }
+      } catch (error) {
+        console.log("Status check failed", error);
+      }
+    }
+    
+    // Check status immediately, then every 30 seconds
+    fetchDiscordStatus();
+    setInterval(fetchDiscordStatus, 30000);
+
+    // ── Modal ──
+    document.getElementById('modalOkBtn').addEventListener('click', function() {
+      const modal = document.getElementById('rulesModal');
+      modal.style.animation = 'none';
+      modal.style.opacity = '0';
+      modal.style.transition = 'opacity 0.4s ease';
+      setTimeout(() => modal.style.display = 'none', 400);
+    });
+
+    // ── Tab switching with animation ──
+    const navLinks = document.querySelectorAll('.nav-link');
+    const sections = document.querySelectorAll('.content-section');
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = this.dataset.section;
+        navLinks.forEach(l => l.classList.remove('active'));
+        this.classList.add('active');
+        sections.forEach(s => {
+          s.classList.remove('active');
+          if (s.dataset.section === target) s.classList.add('active');
+        });
+      });
+    });
+
+    // ── Click ripple + heart effect ──
+    const hearts = ['♡','🌸','✦','⭐','💕','✿'];
+    document.addEventListener('click', function(e) {
+      if(e.target.closest('#roaming-cat-container') || e.target.closest('#theme-toggle')) return;
+
+      const ripple = document.createElement('div');
+      ripple.className = 'ripple';
+      ripple.style.left = e.clientX + 'px';
+      ripple.style.top  = e.clientY + 'px';
+      document.body.appendChild(ripple);
+      setTimeout(() => ripple.remove(), 600);
+
+      const heart = document.createElement('div');
+      heart.className = 'click-heart';
+      heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+      heart.style.left = e.clientX + 'px';
+      heart.style.top  = e.clientY + 'px';
+      
+      const isPinkTheme = rootElement.getAttribute('data-theme') === 'pink';
+      if(isPinkTheme) {
+         heart.style.color = `hsl(${Math.random()*20 + 330}, 80%, 65%)`;
+      } else {
+         heart.style.color = `hsl(${Math.random()*60 + 280}, 80%, 75%)`;
+      }
+      
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
+    });
+
+    // ── Animated Vector Cat logic ──
+    const catContainer = document.getElementById('roaming-cat-container');
+    let catX = 100, catY = 200;
+    let catVisible = false;
+    let isInteracting = false; 
+
+    catContainer.addEventListener('click', function(e) {
+      if(isInteracting || !catVisible) return;
+      isInteracting = true;
+      
+      const currentRect = catContainer.getBoundingClientRect();
+      catContainer.style.transition = 'none';
+      catContainer.style.left = currentRect.left + 'px';
+      catContainer.style.top = currentRect.top + 'px';
+      
+      catContainer.classList.remove('cat-moving');
+      catContainer.classList.add('cat-waving');
+      
+      if(e.clientX < currentRect.left + 30) {
+        catContainer.classList.add('flip-left');
+      } else {
+        catContainer.classList.remove('flip-left');
+      }
+
+      setTimeout(() => {
+        catContainer.style.transition = 'opacity 0.8s ease';
+        catContainer.style.opacity = '0';
+        
+        setTimeout(() => {
+          catContainer.classList.remove('visible', 'cat-waving');
+          catContainer.classList.add('hidden', 'cat-moving');
+          catContainer.style.display = 'none';
+          catVisible = false;
+          isInteracting = false;
+          
+          setTimeout(spawnCat, Math.random() * 20000 + 10000);
+        }, 800);
+      }, 1800);
+    });
+
+    function spawnCat() {
+      if(isInteracting) return;
+      catContainer.style.display = 'block';
+      
+      catX = Math.random() * (window.innerWidth - 80) + 40;
+      catY = Math.random() * (window.innerHeight - 100) + 50;
+      
+      catContainer.style.transition = 'none';
+      catContainer.style.left = catX + 'px';
+      catContainer.style.top  = catY + 'px';
+      
+      setTimeout(() => {
+        catContainer.classList.remove('hidden');
+        catContainer.classList.add('visible');
+        catVisible = true;
+        moveCatLoop();
+      }, 100);
+    }
+
+    function moveCatLoop() {
+      if (!catVisible || isInteracting) return;
+      
+      const newX = Math.random() * (window.innerWidth - 80) + 20;
+      const newY = Math.random() * (window.innerHeight - 100) + 40;
+
+      if (newX < catX) {
+        catContainer.classList.add('flip-left');
+      } else {
+        catContainer.classList.remove('flip-left');
+      }
+
+      catX = newX; catY = newY;
+      
+      catContainer.style.transition = 'left 2.5s ease-in-out, top 2.5s ease-in-out, opacity 0.5s ease';
+      catContainer.style.left = catX + 'px';
+      catContainer.style.top  = catY + 'px';
+
+      const movesLeft = Math.floor(Math.random() * 4) + 3;
+      let moveCount = 0;
+      
+      const interval = setInterval(() => {
+        if(isInteracting || !catVisible) {
+          clearInterval(interval);
+          return;
+        }
+        
+        moveCount++;
+        if (moveCount >= movesLeft) {
+          clearInterval(interval);
+          catContainer.classList.remove('visible');
+          catContainer.classList.add('hidden');
+          catVisible = false;
+          
+          setTimeout(spawnCat, Math.random() * 15000 + 10000);
+        } else {
+          const nx = Math.random() * (window.innerWidth - 80) + 20;
+          const ny = Math.random() * (window.innerHeight - 100) + 40;
+          
+          if (nx < catX) {
+            catContainer.classList.add('flip-left');
+          } else {
+            catContainer.classList.remove('flip-left');
+          }
+          
+          catX = nx; catY = ny;
+          catContainer.style.left = catX + 'px';
+          catContainer.style.top  = catY + 'px';
+        }
+      }, 2600);
+    }
+
+    setTimeout(spawnCat, Math.random() * 5000 + 3000);
+  </script>
+</body>
+</html>
