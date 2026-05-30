@@ -11,7 +11,7 @@
   
   <!-- Script placed high in head to prevent theme flashing -->
   <script>
-    // Now defaults to 'pink' instead of 'purple'
+    // Defaults to 'pink'
     const savedTheme = localStorage.getItem('celeste-theme') || 'pink';
     document.documentElement.setAttribute('data-theme', savedTheme);
   </script>
@@ -269,7 +269,10 @@
       border-color: var(--pink-accent);
     }
     .game-img-wrapper { position: relative; flex-shrink: 0; }
-    .game-img { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; border: 2px solid var(--icon-color); transition: border-color 0.4s ease; background: #fff; }
+    
+    /* Fixed generic styling to support direct transparent game icons */
+    .game-img { width: 58px; height: 58px; border-radius: 12px; object-fit: cover; border: 2px solid var(--icon-color); transition: border-color 0.4s ease; background: var(--bg-base); }
+    
     .game-status {
       position: absolute; bottom: -6px; left: 50%; transform: translateX(-50%);
       font-size: 0.65rem; font-weight: 700; padding: 3px 8px;
@@ -495,7 +498,7 @@
           <img src="https://i.pinimg.com/736x/0e/d3/d2/0ed3d2ff953393979a9cfc291b883da5.jpg" alt="banner" class="banner-img" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=600&h=150&fit=crop'" />
         </div>
         
-        <!-- Profile Pic Container (Status moved here to fix the clipping issue!) -->
+        <!-- Profile Pic Container -->
         <div class="profile-pic-container">
           <div class="profile-pic">
             <img src="https://u.cubeupload.com/xyu/1780085203682.png" alt="celeste" class="profile-img" onerror="this.src='https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'" />
@@ -541,10 +544,10 @@
       </div>
       <div class="games-showcase">
 
-        <!-- Fixed Game Icons Below -->
+        <!-- All Games Now Use Reliable Wikimedia Direct Links w/ Fallback -->
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Rocket_League_coverart.jpg/240px-Rocket_League_coverart.jpg" alt="Rocket League" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Rocket_League_coverart.jpg" alt="Rocket League" class="game-img" onerror="this.src='https://u.cubeupload.com/xyu/wj66ep7cxhrmy0cyeqv9.png'" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -555,7 +558,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft" class="game-img" onerror="this.src='https://u.cubeupload.com/xyu/wj66ep7cxhrmy0cyeqv9.png'" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -566,7 +569,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/44/Forza_Horizon_5_cover_art.jpg/220px-Forza_Horizon_5_cover_art.jpg" alt="Forza Horizon 6" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/4/44/Forza_Horizon_5_cover_art.jpg" alt="Forza Horizon 6" class="game-img" onerror="this.src='https://u.cubeupload.com/xyu/wj66ep7cxhrmy0cyeqv9.png'" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -577,7 +580,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Zenless_Zone_Zero_icon.png" alt="Zenless Zone Zero" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Zenless_Zone_Zero_icon.png" alt="Zenless Zone Zero" class="game-img" onerror="this.src='https://u.cubeupload.com/xyu/wj66ep7cxhrmy0cyeqv9.png'" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -588,7 +591,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Roblox_Player_icon.png/240px-Roblox_Player_icon.png" alt="Roblox" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Roblox_Player_icon.png" alt="Roblox" class="game-img" onerror="this.src='https://u.cubeupload.com/xyu/wj66ep7cxhrmy0cyeqv9.png'" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
