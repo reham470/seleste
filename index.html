@@ -9,14 +9,53 @@
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
   
+  <!-- Script placed high in head to prevent theme flashing -->
   <script>
-    const savedTheme = localStorage.getItem('celeste-theme') || 'purple';
+    // Now defaults to 'pink' instead of 'purple'
+    const savedTheme = localStorage.getItem('celeste-theme') || 'pink';
     document.documentElement.setAttribute('data-theme', savedTheme);
   </script>
 
   <style>
-    /* ── Core Variables (Purple / Dark Mode Default) ── */
-    :root, :root[data-theme="purple"] {
+    /* ── Core Variables (Pink / Light Mode DEFAULT) ── */
+    :root, :root[data-theme="pink"] {
+      --bg-base: #fff0f6;
+      --bg-gradient: linear-gradient(135deg, #fff0f6 0%, #fde8f0 50%, #fce4f4 100%);
+      --card-bg: rgba(255, 255, 255, 0.87);
+      
+      --pink-light: #fde8f0;
+      --pink-mid: #f9b8d0;
+      --pink-dark: #e87da8;
+      --pink-accent: #d4508a;
+      --purple-glow: #f9b8d0;
+      
+      --text-main: #5a3a4a;
+      --text-muted: #9a6070;
+      
+      --glow-shadow: 0 4px 24px rgba(232, 125, 168, 0.13);
+      --border-glow: 1px solid var(--pink-mid);
+      
+      /* Themed Components */
+      --made-by-bg: linear-gradient(90deg, #fde8f0, #fce4f4, #fde8f0);
+      --nav-bg: #fff;
+      --link-color: var(--pink-accent);
+      --nav-active-bg: var(--pink-dark);
+      
+      --box-bg: var(--pink-light);
+      --box-border: var(--pink-mid);
+      --badge-bg: #fff;
+      --badge-text: var(--pink-accent);
+      --modal-overlay: rgba(253, 232, 240, 0.85);
+      
+      --btn-bg: var(--pink-dark);
+      --icon-color: var(--pink-dark);
+      --friend-svg-bg: #fde8f0;
+      --banner-overlay: none;
+      --link-hover-bg: var(--pink-dark);
+    }
+
+    /* ── Core Variables (Purple / Dark Mode) ── */
+    :root[data-theme="purple"] {
       --bg-base: #0f0a12;
       --bg-gradient: linear-gradient(135deg, #160d1a 0%, #0f0a12 50%, #1a0f1d 100%);
       --card-bg: rgba(22, 14, 25, 0.75);
@@ -51,43 +90,6 @@
       --friend-svg-bg: #1a0f1d;
       --banner-overlay: linear-gradient(to bottom, transparent, var(--bg-base));
       --link-hover-bg: linear-gradient(90deg, rgba(212, 80, 138, 0.8), rgba(184, 84, 245, 0.8));
-    }
-
-    /* ── Core Variables (Pink / Light Mode) ── */
-    :root[data-theme="pink"] {
-      --bg-base: #fff0f6;
-      --bg-gradient: linear-gradient(135deg, #fff0f6 0%, #fde8f0 50%, #fce4f4 100%);
-      --card-bg: rgba(255, 255, 255, 0.87);
-      
-      --pink-light: #fde8f0;
-      --pink-mid: #f9b8d0;
-      --pink-dark: #e87da8;
-      --pink-accent: #d4508a;
-      --purple-glow: #f9b8d0;
-      
-      --text-main: #5a3a4a;
-      --text-muted: #9a6070;
-      
-      --glow-shadow: 0 4px 24px rgba(232, 125, 168, 0.13);
-      --border-glow: 1px solid var(--pink-mid);
-      
-      /* Themed Components */
-      --made-by-bg: linear-gradient(90deg, #fde8f0, #fce4f4, #fde8f0);
-      --nav-bg: #fff;
-      --link-color: var(--pink-accent);
-      --nav-active-bg: var(--pink-dark);
-      
-      --box-bg: var(--pink-light);
-      --box-border: var(--pink-mid);
-      --badge-bg: #fff;
-      --badge-text: var(--pink-accent);
-      --modal-overlay: rgba(253, 232, 240, 0.85);
-      
-      --btn-bg: var(--pink-dark);
-      --icon-color: var(--pink-dark);
-      --friend-svg-bg: #fde8f0;
-      --banner-overlay: none;
-      --link-hover-bg: var(--pink-dark);
     }
     
     /* Global Smooth Transitions */
@@ -193,7 +195,15 @@
     .profile-banner { width: 100%; height: 120px; border-radius: 22px 22px 0 0; overflow: hidden; margin-bottom: -40px; position: relative; }
     .profile-banner::after { content: ''; position: absolute; inset: 0; background: var(--banner-overlay); transition: background 0.4s ease; }
     .banner-img { width: 100%; height: 100%; object-fit: cover; }
-    .profile-pic-wrapper { display: flex; justify-content: center; margin-bottom: 12px; position: relative; z-index: 2; }
+    
+    /* Fixed Container for Profile Pic to prevent clipping */
+    .profile-pic-container { 
+      position: relative; 
+      display: inline-flex; 
+      justify-content: center; 
+      margin-bottom: 12px; 
+      z-index: 2; 
+    }
     .profile-pic {
       width: 95px; height: 95px; border-radius: 50%;
       border: 3.5px solid var(--pink-accent); overflow: hidden; position: relative;
@@ -203,15 +213,16 @@
     .profile-pic:hover { transform: scale(1.05) rotate(-3deg); box-shadow: 0 0 25px rgba(255, 102, 178, 0.6); }
     .profile-img { width: 100%; height: 100%; object-fit: cover; }
     
-    /* Discord Realtime Status Indicator */
+    /* Discord Realtime Status Indicator - Placed over the circle properly */
     .profile-status {
-      position: absolute; bottom: 4px; right: 4px;
-      width: 22px; height: 22px; border-radius: 50%;
-      border: 3px solid var(--bg-base);
+      position: absolute; bottom: 0px; right: 0px;
+      width: 28px; height: 28px; border-radius: 50%;
+      border: 4px solid var(--card-bg);
       display: flex; align-items: center; justify-content: center;
-      font-size: 10px; color: #fff; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
+      font-size: 11px; color: #fff; box-shadow: 0 0 8px rgba(0, 0, 0, 0.4);
       transition: background 0.3s ease, border-color 0.4s ease;
       background: #747f8d; /* Default offline color */
+      z-index: 10; /* Ensures it is ABOVE the border */
     }
     .status-online { background: #43b581; }
     .status-idle { background: #faa61a; }
@@ -426,62 +437,16 @@
     }
     @keyframes pulseMusic { 0%, 100% { opacity: 0.7; transform: scale(1); } 50% { opacity: 1; transform: scale(1.1); text-shadow: 0 0 8px var(--pink-accent); } }
 
-    /* ── Animated Vector Cat ── */
-    #roaming-cat-container {
-      position: fixed; width: 60px; height: 60px; pointer-events: auto; cursor: pointer;
-      z-index: 500; transition: left 2s linear, top 2s linear;
-      filter: drop-shadow(0 0 8px rgba(255, 102, 178, 0.4)); will-change: transform, left, top;
-    }
-    .cat-svg { width: 100%; height: 100%; overflow: visible; }
-    @keyframes walk-front { 0% { transform: rotate(0deg); } 25% { transform: rotate(15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(-15deg); } 100% { transform: rotate(0deg); } }
-    @keyframes walk-back { 0% { transform: rotate(0deg); } 25% { transform: rotate(-15deg); } 50% { transform: rotate(0deg); } 75% { transform: rotate(15deg); } 100% { transform: rotate(0deg); } }
-    .cat-moving .leg-1 { transform-origin: top; animation: walk-front 0.6s infinite linear; }
-    .cat-moving .leg-2 { transform-origin: top; animation: walk-back 0.6s infinite linear; }
-    .cat-moving .leg-3 { transform-origin: top; animation: walk-back 0.6s infinite linear; }
-    .cat-moving .leg-4 { transform-origin: top; animation: walk-front 0.6s infinite linear; }
-    @keyframes tail-swish { 0% { transform: rotate(0deg); } 50% { transform: rotate(10deg); } 100% { transform: rotate(0deg); } }
-    .cat-tail { transform-origin: left bottom; animation: tail-swish 2s infinite ease-in-out; }
-    .cat-waving .leg-1 { display: none; } 
-    .cat-waving .wave-arm { display: block; transform-origin: bottom right; animation: wave-paw 0.4s infinite alternate ease-in-out; }
-    @keyframes wave-paw { 0% { transform: rotate(0deg); } 100% { transform: rotate(40deg); } }
-    #roaming-cat-container.hidden { opacity: 0; transition: opacity 0.5s ease; pointer-events: none; }
-    #roaming-cat-container.visible { opacity: 1; transition: opacity 0.5s ease, left 2s linear, top 2s linear; }
-    .flip-left { transform: scaleX(-1); }
   </style>
 </head>
 <body>
 
+  <!-- Theme Toggle Button Moved to Bottom Right -->
   <button id="theme-toggle" class="theme-toggle-btn" title="Change Theme">
     <i class="fas fa-magic"></i>
   </button>
 
-  <div id="roaming-cat-container" class="hidden cat-moving" title="Click me!">
-    <svg class="cat-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-      <g>
-        <path class="cat-tail" d="M 85 55 Q 105 40 95 20" stroke="var(--pink-accent)" stroke-width="6" fill="none" stroke-linecap="round" />
-        <line class="leg-3" x1="65" y1="70" x2="65" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
-        <line class="leg-4" x1="80" y1="70" x2="80" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
-        <rect x="30" y="45" width="60" height="30" rx="15" fill="var(--pink-accent)" />
-        <line class="leg-1" x1="35" y1="70" x2="35" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
-        <line class="leg-2" x1="48" y1="70" x2="48" y2="85" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
-        <g class="wave-arm" style="display:none;" transform="translate(35, 75)">
-           <line x1="0" y1="0" x2="-15" y2="-20" stroke="var(--pink-accent)" stroke-width="6" stroke-linecap="round"/>
-           <circle cx="-16" cy="-22" r="2" fill="var(--bg-base)" />
-        </g>
-        <circle cx="30" cy="40" r="18" fill="var(--pink-accent)" />
-        <polygon points="18,28 15,10 30,24" fill="var(--pink-accent)" />
-        <polygon points="42,28 45,10 30,24" fill="var(--pink-accent)" />
-        <polygon points="20,26 17,14 28,24" fill="var(--bg-base)" opacity="0.4" />
-        <polygon points="40,26 43,14 32,24" fill="var(--bg-base)" opacity="0.4" />
-        <circle cx="23" cy="38" r="2.5" fill="var(--bg-base)" /> 
-        <circle cx="37" cy="38" r="2.5" fill="var(--bg-base)" /> 
-        <path d="M 27 43 Q 30 46 33 43" stroke="var(--bg-base)" fill="none" stroke-width="2" stroke-linecap="round" />
-        <ellipse cx="18" cy="42" rx="3" ry="1.5" fill="var(--icon-color)" opacity="0.6"/>
-        <ellipse cx="42" cy="42" rx="3" ry="1.5" fill="var(--icon-color)" opacity="0.6"/>
-      </g>
-    </svg>
-  </div>
-
+  <!-- Rules Modal -->
   <div class="rules-modal" id="rulesModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -505,8 +470,10 @@
     </div>
   </div>
 
+  <!-- Top badge -->
   <div class="made-by-badge"><span>✧ made by celeste ✧</span></div>
 
+  <!-- Navbar -->
   <nav class="navbar">
     <ul class="nav-menu">
       <li class="nav-item"><a href="#" class="nav-link active" data-section="about">about</a></li>
@@ -521,21 +488,25 @@
 
   <main class="container">
 
+    <!-- ══ ABOUT TAB ══ -->
     <section id="about" class="section-card content-section active" data-section="about">
       <div class="profile-section">
         <div class="profile-banner">
           <img src="https://i.pinimg.com/736x/0e/d3/d2/0ed3d2ff953393979a9cfc291b883da5.jpg" alt="banner" class="banner-img" onerror="this.src='https://images.pexels.com/photos/1939485/pexels-photo-1939485.jpeg?auto=compress&cs=tinysrgb&w=600&h=150&fit=crop'" />
         </div>
-        <div class="profile-pic-wrapper">
+        
+        <!-- Profile Pic Container (Status moved here to fix the clipping issue!) -->
+        <div class="profile-pic-container">
           <div class="profile-pic">
             <img src="https://u.cubeupload.com/xyu/1780085203682.png" alt="celeste" class="profile-img" onerror="this.src='https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg?auto=compress&cs=tinysrgb&w=150&h=150&fit=crop'" />
-            
-            <div id="discord-status" class="profile-status status-offline" title="Checking status...">
-               <i class="fas fa-circle-notch fa-spin"></i>
-            </div>
-            
+          </div>
+          
+          <!-- Realtime Discord Status element properly layered over the border -->
+          <div id="discord-status" class="profile-status status-offline" title="Checking status...">
+             <i class="fas fa-circle-notch fa-spin"></i>
           </div>
         </div>
+
         <h1 class="name-title">celeste <span>🌸</span></h1>
         <p class="pronouns">she / her • 19</p> 
         <div class="bio-box">
@@ -560,6 +531,7 @@
       </div>
     </section>
 
+    <!-- ══ GAMES TAB ══ -->
     <section id="gaming" class="section-card content-section" data-section="gaming">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> my games <span class="title-deco">․</span></h2>
@@ -569,9 +541,10 @@
       </div>
       <div class="games-showcase">
 
+        <!-- Fixed Game Icons Below -->
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://cdn.cloudflare.steamstatic.com/steam/apps/252950/header.jpg" alt="Rocket League" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Rocket_League_coverart.jpg/240px-Rocket_League_coverart.jpg" alt="Rocket League" class="game-img" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -582,7 +555,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://cdn2.steamgriddb.com/file/sgdb-cdn/icon/df19bf747ab444851bd80b957cf3ba22.png" alt="Minecraft" class="game-img" style="background:transparent; object-fit:contain;" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/5/51/Minecraft_cover.png" alt="Minecraft" class="game-img" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -593,7 +566,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://store-images.s-microsoft.com/image/apps.43004.13788092892305597.551db84c-3ba0-4223-9588-4e803d51ebdc.7b8cfdff-5dfd-4bd9-9069-93e15091ff74" alt="Forza Horizon 6" class="game-img" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/4/44/Forza_Horizon_5_cover_art.jpg/220px-Forza_Horizon_5_cover_art.jpg" alt="Forza Horizon 6" class="game-img" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -604,7 +577,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://cdn2.steamgriddb.com/icon/4e7f9e8ce294da1bc391a62cc4a3ea30.png" alt="Zenless Zone Zero" class="game-img" style="background:transparent; object-fit:contain;" />
+            <img src="https://upload.wikimedia.org/wikipedia/en/3/3f/Zenless_Zone_Zero_icon.png" alt="Zenless Zone Zero" class="game-img" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -615,7 +588,7 @@
 
         <div class="game-card">
           <div class="game-img-wrapper">
-            <img src="https://cdn2.steamgriddb.com/icon/3ab39794d2ba6a1cd0bcbf0c29ed212d.png" alt="Roblox" class="game-img" style="background:transparent; object-fit:contain;" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Roblox_Player_icon.png/240px-Roblox_Player_icon.png" alt="Roblox" class="game-img" />
             <span class="game-status casual">casual</span>
           </div>
           <div class="game-info">
@@ -645,6 +618,7 @@
       </div>
     </section>
 
+    <!-- ══ PROJECTS TAB ══ -->
     <section id="projects" class="section-card content-section" data-section="projects">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> my projects <span class="title-deco">․</span></h2>
@@ -676,6 +650,7 @@
       </div>
     </section>
 
+    <!-- ══ FAVES TAB ══ -->
     <section id="faves" class="section-card content-section" data-section="faves">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> Current faves <span class="title-deco">․</span></h2>
@@ -692,6 +667,7 @@
       </div>
     </section>
 
+    <!-- ══ RULES TAB ══ -->
     <section id="rules" class="section-card content-section" data-section="rules">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> my rules <span class="title-deco">․</span></h2>
@@ -735,6 +711,7 @@
       </div>
     </section>
 
+    <!-- ══ FRIENDS TAB ══ -->
     <section id="friends" class="section-card content-section" data-section="friends">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> my besties <span class="title-deco">․</span></h2>
@@ -763,6 +740,7 @@
       <div class="fun-fact"><i class="fas fa-sparkles" style="color:var(--icon-color);"></i> I love my besties, let's be friends too ♡</div>
     </section>
 
+    <!-- ══ CREDITS TAB ══ -->
     <section id="credits" class="section-card content-section" data-section="credits">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> credits <span class="title-deco">․</span></h2>
@@ -780,6 +758,7 @@
       </div>
     </section>
 
+    <!-- ══ CONNECT (always visible) ══ -->
     <section class="section-card">
       <div class="section-header-wrapper">
         <h2 class="section-title"><span class="title-deco">․</span> let's be friends <span class="title-deco">․</span></h2>
@@ -891,7 +870,7 @@
     // ── Click ripple + heart effect ──
     const hearts = ['♡','🌸','✦','⭐','💕','✿'];
     document.addEventListener('click', function(e) {
-      if(e.target.closest('#roaming-cat-container') || e.target.closest('#theme-toggle')) return;
+      if(e.target.closest('#theme-toggle')) return;
 
       const ripple = document.createElement('div');
       ripple.className = 'ripple';
@@ -916,119 +895,7 @@
       document.body.appendChild(heart);
       setTimeout(() => heart.remove(), 1000);
     });
-
-    // ── Animated Vector Cat logic ──
-    const catContainer = document.getElementById('roaming-cat-container');
-    let catX = 100, catY = 200;
-    let catVisible = false;
-    let isInteracting = false; 
-
-    catContainer.addEventListener('click', function(e) {
-      if(isInteracting || !catVisible) return;
-      isInteracting = true;
-      
-      const currentRect = catContainer.getBoundingClientRect();
-      catContainer.style.transition = 'none';
-      catContainer.style.left = currentRect.left + 'px';
-      catContainer.style.top = currentRect.top + 'px';
-      
-      catContainer.classList.remove('cat-moving');
-      catContainer.classList.add('cat-waving');
-      
-      if(e.clientX < currentRect.left + 30) {
-        catContainer.classList.add('flip-left');
-      } else {
-        catContainer.classList.remove('flip-left');
-      }
-
-      setTimeout(() => {
-        catContainer.style.transition = 'opacity 0.8s ease';
-        catContainer.style.opacity = '0';
-        
-        setTimeout(() => {
-          catContainer.classList.remove('visible', 'cat-waving');
-          catContainer.classList.add('hidden', 'cat-moving');
-          catContainer.style.display = 'none';
-          catVisible = false;
-          isInteracting = false;
-          
-          setTimeout(spawnCat, Math.random() * 20000 + 10000);
-        }, 800);
-      }, 1800);
-    });
-
-    function spawnCat() {
-      if(isInteracting) return;
-      catContainer.style.display = 'block';
-      
-      catX = Math.random() * (window.innerWidth - 80) + 40;
-      catY = Math.random() * (window.innerHeight - 100) + 50;
-      
-      catContainer.style.transition = 'none';
-      catContainer.style.left = catX + 'px';
-      catContainer.style.top  = catY + 'px';
-      
-      setTimeout(() => {
-        catContainer.classList.remove('hidden');
-        catContainer.classList.add('visible');
-        catVisible = true;
-        moveCatLoop();
-      }, 100);
-    }
-
-    function moveCatLoop() {
-      if (!catVisible || isInteracting) return;
-      
-      const newX = Math.random() * (window.innerWidth - 80) + 20;
-      const newY = Math.random() * (window.innerHeight - 100) + 40;
-
-      if (newX < catX) {
-        catContainer.classList.add('flip-left');
-      } else {
-        catContainer.classList.remove('flip-left');
-      }
-
-      catX = newX; catY = newY;
-      
-      catContainer.style.transition = 'left 2.5s ease-in-out, top 2.5s ease-in-out, opacity 0.5s ease';
-      catContainer.style.left = catX + 'px';
-      catContainer.style.top  = catY + 'px';
-
-      const movesLeft = Math.floor(Math.random() * 4) + 3;
-      let moveCount = 0;
-      
-      const interval = setInterval(() => {
-        if(isInteracting || !catVisible) {
-          clearInterval(interval);
-          return;
-        }
-        
-        moveCount++;
-        if (moveCount >= movesLeft) {
-          clearInterval(interval);
-          catContainer.classList.remove('visible');
-          catContainer.classList.add('hidden');
-          catVisible = false;
-          
-          setTimeout(spawnCat, Math.random() * 15000 + 10000);
-        } else {
-          const nx = Math.random() * (window.innerWidth - 80) + 20;
-          const ny = Math.random() * (window.innerHeight - 100) + 40;
-          
-          if (nx < catX) {
-            catContainer.classList.add('flip-left');
-          } else {
-            catContainer.classList.remove('flip-left');
-          }
-          
-          catX = nx; catY = ny;
-          catContainer.style.left = catX + 'px';
-          catContainer.style.top  = catY + 'px';
-        }
-      }, 2600);
-    }
-
-    setTimeout(spawnCat, Math.random() * 5000 + 3000);
   </script>
 </body>
 </html>
+
